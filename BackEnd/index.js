@@ -4,6 +4,7 @@ import dbConnect from './DB/dbConnect.js';
 import authRouter from './route/authUser.js'
 import messageRouter from "./route/messageRoute.js"
 import cookieParser from 'cookie-parser';
+import userRoute from "./route/userRoute.js"
 
 const app = express()
 dotenv.config()
@@ -13,6 +14,7 @@ app.use(cookieParser());
 
 app.use('/api/auth',authRouter)
 app.use('/api/message',messageRouter)
+app.use('/api/user',userRoute)
 
 app.get('/',(req,res)=>{
     res.send('server is working')

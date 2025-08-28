@@ -13,7 +13,8 @@ export const sendMessage = async (req, res)=>{
 
         if(!chats){
             chats = await conversation.create({
-                participants:[senderId,receiverId]
+                participants:[senderId,receiverId],
+                message:[]
             })
         }
         const newMessage = new myMessage({
@@ -22,9 +23,7 @@ export const sendMessage = async (req, res)=>{
             message,
             conversationId:chats._id
         })
-       if(!newMessage){
-        chats.messages.push(newMessage._id);
-       }
+     chats.messages.push(newMessage._id);
 
         await Promise.all([chats.save(), newMessage.save()])
 
@@ -34,3 +33,19 @@ export const sendMessage = async (req, res)=>{
         console.log(`error in sendMessage ${error.message}`);
     }
 } 
+
+export const getMessage = async (req, res)=>{
+    try {
+        const { id: receiverId } = req.params;
+        const senderId = req.user._id;
+
+        const chats = await conversation.findOne({
+            participants:{$all:[senderId,receiverId]}
+        }).populate("messages");
+        // if(!chats) return res.status(200).send([])
+            const message = chats.messages;
+        res.status(200).send(message)
+    } catch (error) {
+         console.log(`error in getMessage ${error.message}`);
+    }
+}
