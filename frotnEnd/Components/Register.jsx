@@ -93,6 +93,14 @@ const Register = () => {
             className="input"
             required
           />
+          <input
+            type="date"
+            onChange={handelInput}
+            placeholder="Date of Birth"
+            id="dob"
+            className="input"
+            required
+          />
         
 
           {/* 🔑 Password with toggle */}
@@ -174,14 +182,7 @@ const Register = () => {
             </Link>
           </p>
         </div>
-        <div>
-          <p className="text-white pt-2">
-            Don't Remember Your password ?{" "}
-            <Link to={"/login"}>
-              <span className="underline hover:text-red-300">Forget Now</span>
-            </Link>
-          </p>
-        </div>
+     
       </div>
     </div>
   );
