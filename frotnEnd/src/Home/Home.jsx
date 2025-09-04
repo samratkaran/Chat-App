@@ -1,13 +1,17 @@
 import React from 'react'
-import { useAuth } from '../context/AuthContext'
-
+import Sidebar from '../../Components/Sidebar'
+import MessageContainer from '../../Components/MessageContainer'
 const Home = () => {
-    const {authUser} = useAuth()
+    
   return (
-    <div>
-      welcome {authUser.user.fullname || "Guest"}
-    </div>
+    
+     <div className='w-full bg-red-300 flex '>
+    <Sidebar/>
+     <MessageContainer/>
+     </div>
+    
   )
 }
 
 export default Home
+
